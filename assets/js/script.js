@@ -4,7 +4,7 @@ const cityEl = document.querySelector("#searchcity");
 var latitude = "";
 var longitude = "";
 
-searchBtn.on("click", function () {
+function getWeather() {
     let city = cityEl.value.trim();
     let queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + APIkey;
 
@@ -13,6 +13,7 @@ searchBtn.on("click", function () {
         return response.json();
       })
       .then(function (data) {
+        console.log(data);
         latitude = data[0].lat
         longitude = data[0].lon
         console.log(data[0].name);
@@ -30,12 +31,26 @@ searchBtn.on("click", function () {
             console.log(data.main.feels_like);
             console.log(data.main.temp_min);
             console.log(data.main.temp_max);
-            console.log(data.main.humidity);
-            console.log(data.wind.speed);
           });
+
+          let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + latitude +"&lon=" + longitude + "&appid=" + APIkey + "&units=imperial";
+          fetch(forecastURL)
+          .then(function (response) {
+              return response.json();
+            })
+            .then(function (data) {
+              console.log(data);
+              let i = 0;
+              do {               
+                console.log(data.list[i].dt_txt);
+                console.log(data.list[i].main.temp_max);
+                console.log(data.list[i].main.temp_min);
+                console.log(data.list[i].weather[0].description);
+                console.log(i);
+                i = i + 8;          
+              } while (i < 40);
+            });
       });
+};
 
-    
-
-  
-});
+searchBtn.on("click", getWeather);
