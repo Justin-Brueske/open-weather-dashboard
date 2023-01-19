@@ -2,3 +2,8 @@ header {
     font-size: 50px;
     text-align: center;
 }
+
+
+#current-weather {
+    padding: 2rem;
+}
