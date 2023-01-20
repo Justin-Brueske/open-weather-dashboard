@@ -50,12 +50,12 @@ function getWeather() {
               let k = 0;
               do {               
                 console.log(data.list[i].dt_txt);
-                console.log(new Date().toLocaleDateString(data.list[i].dt));
+                console.log(data.list[i].dt);
                 console.log(data.list[i].main.temp_max);
                 console.log(data.list[i].main.temp_min);
                 console.log(data.list[i].weather[0].description);
                 console.log(i);
-                let forecastDay = new Date().toLocaleDateString(data.list[i].dt);
+                let forecastDay = (new Date(data.list[i].dt*1000).toDateString());
                 let forecast = '<div><span class="text-2xl">' + forecastDay + '</span> <ul class="list-none"> <li>High: ' + data.list[i].main.temp_max + '&#8457;</li> <li>Low: ' + data.list[i].main.temp_min + '&#8457;</li> <li>Weather: ' + data.list[i].weather[0].description + '</li> </ul><div>';
                 $("#five-day-forecast").append(forecast);
                 k++;
