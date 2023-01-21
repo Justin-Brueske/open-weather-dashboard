@@ -3,6 +3,7 @@ const searchBtn = $("#search-button");
 const cityEl = document.querySelector("#searchcity");
 const searchedCityEl = $("#searched-cities");
 const forecastEl = $("#five-day-forecast");
+const clearBtn = $("#clearLocal")
 var searchedCities = [];
 var latitude = "";
 var longitude = "";
@@ -60,7 +61,6 @@ function renderCities() {
     searchedCityEl.html("");
     for (let index = 0; index < searchedCities.length; index++) {
         const historyCity = searchedCities[index];
-        console.log(searchedCities[index]);
         var button = '<li><button type="button">' + historyCity + '</button></li>'; 
         searchedCityEl.append(button);        
     } 
@@ -75,5 +75,16 @@ function init() {
     renderCities();
 }
 
+$('#searched-cities').on("click", (event) => {
+    console.log(event.target.textContent);
+    cityEl.value = (event.target.textContent);
+    getWeather();
+});
+
+clearBtn.on('click', (event) => {
+    localStorage.clear();
+    searchedCities = []
+    renderCities();
+});
 
 init()
