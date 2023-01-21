@@ -17,16 +17,12 @@ function getWeather() {
         return response.json();
       })
       .then(function (data) {
-        // console.log(data);
         latitude = data[0].lat
         longitude = data[0].lon
-        console.log(data[0].name);
         searchedCities.unshift(data[0].name);
-        console.log(searchedCities);
         localStorage.setItem("cityHistory", JSON.stringify(searchedCities));
         renderCities();
-        // console.log(data[0].lat);
-        // console.log(data[0].lon);
+
         let weatherURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude +"&lon=" + longitude + "&appid=" + APIkey + "&units=imperial";
         
         fetch(weatherURL)
@@ -34,11 +30,6 @@ function getWeather() {
             return response.json();
           })
           .then(function (data) {
-            // console.log(data);
-            // console.log(data.main.temp);
-            // console.log(data.main.feels_like);
-            // console.log(data.main.temp_min);
-            // console.log(data.main.temp_max);
             let currentWeather = '<h3 class="text-3xl">' + data.name + '</h3> <ul class="list-none"> <li>Temperature: ' + data.main.temp + '&#8457;</li> <li>Feels like: ' + data.main.feels_like + '&#8457;</li> <li>Humidity: ' +  data.main.humidity + '%</li> </ul>';
             $("#current-weather").html(currentWeather);
           });
@@ -49,17 +40,10 @@ function getWeather() {
               return response.json();
             })
             .then(function (data) {
-            //   console.log(data);
               forecastEl.html("");
               let i = 0;
               let k = 0;
               do {               
-                // console.log(data.list[i].dt_txt);
-                // console.log(data.list[i].dt);
-                // console.log(data.list[i].main.temp_max);
-                // console.log(data.list[i].main.temp_min);
-                // console.log(data.list[i].weather[0].description);
-                // console.log(i);
                 let forecastDay = (new Date(data.list[i].dt*1000).toDateString());
                 let forecast = '<div><span class="text-2xl">' + forecastDay + '</span> <ul class="list-none"> <li>High: ' + data.list[i].main.temp_max + '&#8457;</li> <li>Low: ' + data.list[i].main.temp_min + '&#8457;</li> <li>Weather: ' + data.list[i].weather[0].description + '</li> </ul><div>';
                 forecastEl.append(forecast);
@@ -77,9 +61,8 @@ function renderCities() {
     for (let index = 0; index < searchedCities.length; index++) {
         const historyCity = searchedCities[index];
         console.log(searchedCities[index]);
-        var li = document.createElement('li');
-        li.textContent = historyCity;
-        searchedCityEl.append(li);        
+        var button = '<li><button type="button">' + historyCity + '</button></li>'; 
+        searchedCityEl.append(button);        
     } 
 }
 
