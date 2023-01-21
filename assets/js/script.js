@@ -1,7 +1,8 @@
 const APIkey = "d696f01bdf9b60c2f86dcdcbeb4320f0";
 const searchBtn = $("#search-button");
 const cityEl = document.querySelector("#searchcity");
-const searchedCityEl = $("#searched-cities")
+const searchedCityEl = $("#searched-cities");
+const forecastEl = $("#five-day-forecast");
 var searchedCities = [];
 var latitude = "";
 var longitude = "";
@@ -9,6 +10,7 @@ var longitude = "";
 function getWeather() {
     let city = cityEl.value.trim();
     let queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + APIkey;
+    cityEl.value = "";
 
     fetch(queryURL)
     .then(function (response) {
@@ -46,6 +48,7 @@ function getWeather() {
             })
             .then(function (data) {
               console.log(data);
+              forecastEl.html("");
               let i = 0;
               let k = 0;
               do {               
@@ -57,7 +60,7 @@ function getWeather() {
                 console.log(i);
                 let forecastDay = (new Date(data.list[i].dt*1000).toDateString());
                 let forecast = '<div><span class="text-2xl">' + forecastDay + '</span> <ul class="list-none"> <li>High: ' + data.list[i].main.temp_max + '&#8457;</li> <li>Low: ' + data.list[i].main.temp_min + '&#8457;</li> <li>Weather: ' + data.list[i].weather[0].description + '</li> </ul><div>';
-                $("#five-day-forecast").append(forecast);
+                forecastEl.append(forecast);
                 k++;
                 i = i + 8;          
               } while (i < 40);
