@@ -11,11 +11,11 @@ This project uses api calls to tell the weather and 5 day forecast.
 
 
 # Links
-[Code Repository](https://github.com/Justin-Brueske/work-day-scheduler)
+[Code Repository](https://github.com/Justin-Brueske/open-weather-dashboard)
 
-[Deployed Site](https://justin-brueske.github.io/work-day-scheduler/)
+[Deployed Site](https://justin-brueske.github.io/open-weather-dashboard/)
 
 # Usage 
 Can be viewed in desktop or mobile web browser.
 
-![screen shot](./assets/images/schedulerscreenshot.gif)
+![screen shot](./assets/images/openweather.gif)

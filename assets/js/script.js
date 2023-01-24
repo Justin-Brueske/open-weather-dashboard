@@ -50,7 +50,7 @@ function getWeather() {
               let k = 0;
               do {               
                 let forecastDay = (new Date(data.list[i].dt*1000).toDateString());
-                let forecast = '<div><span class="text-2xl">' + forecastDay + '</span> <ul class="list-none"> <li>Temperature: ' + data.list[i].main.temp + '&#8457;</li> <li>Humidity: ' +  data.list[i].main.humidity + '%</li> <li>Wind: ' + data.list[i].wind.speed + 'mph</li> <li>Weather: ' + data.list[i].weather[0].description + '<img src="http://openweathermap.org/img/w/' + data.list[i].weather[0].icon + '.png" alt="Weather icon"></li> </ul><div>';
+                let forecast = '<div><span class="text-2xl">' + forecastDay + '</span> <ul class="list-none"> <li>Temperature: ' + data.list[i].main.temp + '&#8457;</li> <li>Humidity: ' +  data.list[i].main.humidity + '%</li> <li>Wind: ' + data.list[i].wind.speed + 'mph</li> <li>Weather: ' + data.list[i].weather[0].description + '<img src="https://openweathermap.org/img/w/' + data.list[i].weather[0].icon + '.png" alt="Weather icon"></li> </ul><div>';
                 forecastEl.append(forecast);
                 k++;
                 i = i + 8;          
