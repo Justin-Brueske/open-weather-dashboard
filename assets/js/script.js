@@ -10,7 +10,7 @@ var longitude = "";
 
 function getWeather() {
     let city = cityEl.value;
-    let queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + APIkey;
+    let queryURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + APIkey;
     cityEl.value = "";
 
     fetch(queryURL)
