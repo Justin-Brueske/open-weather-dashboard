@@ -20,9 +20,13 @@ function getWeather() {
       .then(function (data) {
         latitude = data[0].lat
         longitude = data[0].lon
-        searchedCities.unshift(data[0].name);
-        localStorage.setItem("cityHistory", JSON.stringify(searchedCities));
-        renderCities();
+        let history = $.inArray(data[0].name, searchedCities)
+        if (history === -1) {
+            searchedCities.unshift(data[0].name);
+            localStorage.setItem("cityHistory", JSON.stringify(searchedCities));
+            renderCities();
+        }
+
 
         let weatherURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude +"&lon=" + longitude + "&appid=" + APIkey + "&units=imperial";
         
@@ -31,7 +35,7 @@ function getWeather() {
             return response.json();
           })
           .then(function (data) {
-            let currentWeather = '<h3 class="text-3xl">' + data.name + '</h3> <ul class="list-none"> <li>Temperature: ' + data.main.temp + '&#8457;</li> <li>Feels like: ' + data.main.feels_like + '&#8457;</li> <li>Humidity: ' +  data.main.humidity + '%</li> </ul>';
+            let currentWeather = '<h3 class="text-3xl">' + data.name + '</h3> <ul class="list-none"> <li>Temperature: ' + data.main.temp + '&#8457;</li> <li>Feels like: ' + data.main.feels_like + '&#8457;</li> <li>Max Temp: ' + data.main.temp_max + '&#8457;</li> <li>Min Temp: ' + data.main.temp_min + '&#8457;</li><li>Humidity: ' +  data.main.humidity + '%</li> <li>Weather: ' + data.weather[0].description + ' </ul>';
             $("#current-weather").html(currentWeather);
           });
 
@@ -40,13 +44,13 @@ function getWeather() {
           .then(function (response) {
               return response.json();
             })
-            .then(function (data) {
+            .then(function (data) { 
               forecastEl.html("");
               let i = 0;
               let k = 0;
               do {               
                 let forecastDay = (new Date(data.list[i].dt*1000).toDateString());
-                let forecast = '<div><span class="text-2xl">' + forecastDay + '</span> <ul class="list-none"> <li>High: ' + data.list[i].main.temp_max + '&#8457;</li> <li>Low: ' + data.list[i].main.temp_min + '&#8457;</li> <li>Weather: ' + data.list[i].weather[0].description + '</li> </ul><div>';
+                let forecast = '<div><span class="text-2xl">' + forecastDay + '</span> <ul class="list-none"> <li>Temperature: ' + data.list[i].main.temp + '&#8457;</li> <li>Humidity: ' +  data.list[i].main.humidity + '%</li> <li>Wind: ' + data.list[i].wind.speed + 'mph</li> <li>Weather: ' + data.list[i].weather[0].description + '</li> </ul><div>';
                 forecastEl.append(forecast);
                 k++;
                 i = i + 8;          
