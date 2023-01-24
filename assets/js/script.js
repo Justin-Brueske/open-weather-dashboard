@@ -80,7 +80,6 @@ function init() {
 }
 
 $('#searched-cities').on("click", (event) => {
-    console.log(event.target.textContent);
     cityEl.value = (event.target.textContent);
     getWeather();
 });
