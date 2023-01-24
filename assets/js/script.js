@@ -35,7 +35,7 @@ function getWeather() {
             return response.json();
           })
           .then(function (data) {
-            let currentWeather = '<h3 class="text-3xl">' + data.name + '</h3> <ul class="list-none"> <li>Temperature: ' + data.main.temp + '&#8457;</li> <li>Feels like: ' + data.main.feels_like + '&#8457;</li> <li>Max Temp: ' + data.main.temp_max + '&#8457;</li> <li>Min Temp: ' + data.main.temp_min + '&#8457;</li><li>Humidity: ' +  data.main.humidity + '%</li> <li>Weather: ' + data.weather[0].description + ' </ul>';
+            let currentWeather = '<h3 class="text-3xl">' + data.name + '</h3> <ul class="list-none"> <li>Temperature: ' + data.main.temp + '&#8457;</li> <li>Feels like: ' + data.main.feels_like + '&#8457;</li> <li>Max Temp: ' + data.main.temp_max + '&#8457;</li> <li>Min Temp: ' + data.main.temp_min + '&#8457;</li><li>Humidity: ' +  data.main.humidity + '%</li> <li>Weather: ' + data.weather[0].description + '<img src="http://openweathermap.org/img/w/' + data.weather[0].icon + '.png" alt="Weather icon"> </ul>';
             $("#current-weather").html(currentWeather);
           });
 
@@ -50,7 +50,7 @@ function getWeather() {
               let k = 0;
               do {               
                 let forecastDay = (new Date(data.list[i].dt*1000).toDateString());
-                let forecast = '<div><span class="text-2xl">' + forecastDay + '</span> <ul class="list-none"> <li>Temperature: ' + data.list[i].main.temp + '&#8457;</li> <li>Humidity: ' +  data.list[i].main.humidity + '%</li> <li>Wind: ' + data.list[i].wind.speed + 'mph</li> <li>Weather: ' + data.list[i].weather[0].description + '</li> </ul><div>';
+                let forecast = '<div><span class="text-2xl">' + forecastDay + '</span> <ul class="list-none"> <li>Temperature: ' + data.list[i].main.temp + '&#8457;</li> <li>Humidity: ' +  data.list[i].main.humidity + '%</li> <li>Wind: ' + data.list[i].wind.speed + 'mph</li> <li>Weather: ' + data.list[i].weather[0].description + '<img src="http://openweathermap.org/img/w/' + data.list[i].weather[0].icon + '.png" alt="Weather icon"></li> </ul><div>';
                 forecastEl.append(forecast);
                 k++;
                 i = i + 8;          
